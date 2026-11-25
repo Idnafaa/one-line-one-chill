@@ -17,6 +17,10 @@ def main():
     text = LINE.strip()
     assert 1 <= len(text) <= 200, f"line is {len(text)} chars"
     assert text.count("\n") == 0, "line must be a single line"
+    assert text.endswith((".", "!", "?")), "line must end with terminal punctuation"
+    assert text.count(".") + text.count("!") + text.count("?") == 1, (
+        "line must be a single sentence"
+    )
     outdir = "/output"
     os.makedirs(outdir, exist_ok=True)
     with open(os.path.join(outdir, "entry.txt"), "w", encoding="utf-8") as f:
